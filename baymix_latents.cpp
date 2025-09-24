@@ -1,7 +1,8 @@
-\
+Rcpp::sourceCpp(code = '
 // [[Rcpp::depends(RcppArmadillo)]]
 // [[Rcpp::plugins(cpp17)]]
 #include <RcppArmadillo.h>
+
 using namespace arma;
 
 // [[Rcpp::export]]
@@ -22,6 +23,7 @@ Rcpp::List baymix_update_latents_cpp(
   const double tXY2 = theta_XY * theta_XY;
   const double tYX2 = theta_YX * theta_YX;
 
+  // precompute (scalar*vector uses *, NOT %)
   arma::vec q11g = uX + tXY2 * uY;
   arma::vec q12g = theta_XY * uY;
   arma::vec q22g = uY;
@@ -42,6 +44,7 @@ Rcpp::List baymix_update_latents_cpp(
     const int wj = zw(j,1);
 
     if (zj==1 && wj==1) {
+      // 4D (x, gamma, y, delta)
       Prec = J4;
       Prec(0,0) += q11g(j); Prec(0,1) += q12g(j); Prec(1,0) += q12g(j); Prec(1,1) += q22g(j);
       Prec(2,2) += q11d(j); Prec(2,3) += q12d(j); Prec(3,2) += q12d(j); Prec(3,3) += q22d(j);
@@ -49,7 +52,7 @@ Rcpp::List baymix_update_latents_cpp(
       h.set_size(4);
       h(0)=h1g(j); h(1)=h2g(j); h(2)=h1d(j); h(3)=h2d(j);
 
-      R  = arma::chol(Prec);
+      R  = arma::chol(Prec);                                    // Prec = R.t()*R
       mu = arma::solve(arma::trimatu(R), arma::solve(arma::trimatl(R.t()), h));
       znoise.set_size(4); znoise.randn();
       draw = mu + arma::solve(arma::trimatu(R), znoise);
@@ -57,6 +60,7 @@ Rcpp::List baymix_update_latents_cpp(
       x(j)=draw(0); g(j)=draw(1); y(j)=draw(2); d(j)=draw(3);
 
     } else if (zj==1 && wj==0) {
+      // 3D (x, gamma, y)
       JAA = J4.submat(uvec{0,1,2}, uvec{0,1,2});
       Prec = JAA;
       Prec(0,0) += q11g(j); Prec(0,1) += q12g(j); Prec(1,0) += q12g(j); Prec(1,1) += q22g(j);
@@ -73,6 +77,7 @@ Rcpp::List baymix_update_latents_cpp(
       x(j)=draw(0); g(j)=draw(1); y(j)=draw(2); d(j)=0.0;
 
     } else if (zj==0 && wj==1) {
+      // 3D (x, y, delta)
       JAA = J4.submat(uvec{0,2,3}, uvec{0,2,3});
       Prec = JAA;
       Prec(0,0) += q11g(j);
@@ -89,6 +94,7 @@ Rcpp::List baymix_update_latents_cpp(
       x(j)=draw(0); g(j)=0.0; y(j)=draw(1); d(j)=draw(2);
 
     } else {
+      // 2D (x, y)
       JAA = J4.submat(uvec{0,2}, uvec{0,2});
       Prec = JAA;
       Prec(0,0) += q11g(j);
@@ -113,3 +119,4 @@ Rcpp::List baymix_update_latents_cpp(
     Rcpp::Named("delta") = d
   );
 }
+')
