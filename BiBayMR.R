@@ -1,4 +1,3 @@
-\
 #' Bidirectional BiBayMR sampler with latent updates in C++
 #'
 #' @param bX,bY Numeric vectors of marginal SNP associations.
