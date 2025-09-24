@@ -1,4 +1,3 @@
-\
 #' Parametric bootstrap for BiBayMR bidirectional MR
 #'
 #' @inheritParams BiBayMR
