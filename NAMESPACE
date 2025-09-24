@@ -1,0 +1,4 @@
+useDynLib(BiBayMR, .registration = TRUE)
+importFrom(Rcpp, evalCpp)
+export(BiBayMR)
+export(BiBayMR_DP)
