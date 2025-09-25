@@ -6,9 +6,6 @@ Bidirectional Bayesian Mendelian Randomization (BiBayMR) with RcppArmadillo.
 
 ```r
 install.packages(c("devtools","Rcpp","RcppArmadillo","roxygen2"))
-devtools::document()
-Rcpp::compileAttributes()
-devtools::install()
 ```
 
 ## Example
