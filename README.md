@@ -14,7 +14,6 @@ devtools::install()
 ## Example
 
 ```r
-library(BiBayMR)
 set.seed(123)
 p <- 50
 theta_XY_true <- 0.2; theta_YX_true <- 0.0
