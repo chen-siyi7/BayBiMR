@@ -1,11 +1,11 @@
-#' Parametric bootstrap for BiBayMR bidirectional MR
+#' Parametric bootstrap for BayBiMR 
 #'
-#' @inheritParams BiBayMR
+#' @inheritParams BayBiMR
 #' @param B Number of bootstrap replicates.
 #' @param progress Show a text progress bar.
 #' @return A list with bootstrap `summary`, replicate `draws`, any `errors`, and `meta`.
 #' @export
-BiBayMR_DP <- function(
+BayBiMR_DP <- function(
   bX, sX, bY, sY,
   B = 200,
   n_iter = 6000, burnin = 2000, thin = 2,
@@ -59,7 +59,7 @@ BiBayMR_DP <- function(
   one_rep <- function(b_idx) {
     bX_star <- bX + stats::rnorm(p, 0, sX)
     bY_star <- bY + stats::rnorm(p, 0, sY)
-    BiBayMR(
+    BayBiMR(
       bX = bX_star, sX = sX, bY = bY_star, sY = sY,
       n_iter = n_iter, burnin = burnin, thin = thin,
       update_cov_every = update_cov_every, seed = seed + b_idx
@@ -130,6 +130,6 @@ BiBayMR_DP <- function(
                    n_iter = n_iter, burnin = burnin, thin = thin,
                    update_cov_every = update_cov_every)
   )
-  class(out) <- c("BiBayMR_DP", class(out))
+  class(out) <- c("BayBiMR_DP", class(out))
   out
 }
