@@ -1,6 +1,6 @@
-# BiBayMR
+# BayBiMR
 
-Bidirectional Bayesian Mendelian Randomization (BiBayMR) with RcppArmadillo.
+Bidirectional Bayesian Mendelian Randomization (BayBiMR) with RcppArmadillo.
 
 ## Install
 
@@ -20,9 +20,9 @@ bX <- gamma + rnorm(p, 0, 0.05)
 bY <- theta_XY_true * gamma + delta + rnorm(p, 0, 0.05)
 sX <- rep(0.05, p); sY <- rep(0.05, p)
 
-fit <- BiBayMR(bX, sX, bY, sY, n_iter = 2000, burnin = 500, thin = 2, seed = 1)
+fit <- BayBiMR(bX, sX, bY, sY, n_iter = 2000, burnin = 500, thin = 2, seed = 1)
 print(fit)
 
-boot <- BiBayMR_DP(bX, sX, bY, sY, B = 20, n_iter = 1500, burnin = 500, thin = 2, seed = 2)
+boot <- BayBiMR_DP(bX, sX, bY, sY, B = 20, n_iter = 1500, burnin = 500, thin = 2, seed = 2)
 boot$summary
 ```
