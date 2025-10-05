@@ -1,4 +1,4 @@
-#' Bidirectional BiBayMR sampler with latent updates in C++
+#' Bidirectional BayBiMR sampler with latent updates in C++
 #'
 #' @param bX,bY Numeric vectors of marginal SNP associations.
 #' @param sX,sY Numeric vectors of standard errors (positive).
@@ -12,7 +12,7 @@
 #' @param seed RNG seed.
 #' @return A data.frame with posterior summaries; PIPs, draws as attributes.
 #' @export
-BiBayMR <- function(
+BayBiMR <- function(
   bX, sX, bY, sY,
   n_iter = 6000, burnin = 2000, thin = 1L,
   tau_theta = 0.3,
