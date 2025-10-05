@@ -1,9 +1,9 @@
-Package: BiBayMR
+Package: BayBiMR
 Type: Package
-Title: Bidirectional Bayesian Mendelian Randomization via BayMix (RcppArmadillo)
+Title: Bidirectional Bayesian Mendelian Randomization via BayBiMR (RcppArmadillo)
 Version: 0.1.0
 Authors@R: c(person(given = "Your", family = "Name", role = c("aut","cre"), email = "you@example.com"))
-Description: Implements Bidirectional Bayesian Mendelian Randomization (BiBayMR) with fast latent updates in C++ via RcppArmadillo. Includes bootstrap with Data Perturbation (DP).
+Description: Implements Bidirectional Bayesian Mendelian Randomization (BayBiMR) with fast latent updates in C++ via RcppArmadillo. Includes bootstrap with Data Perturbation (DP).
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
