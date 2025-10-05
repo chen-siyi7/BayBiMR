@@ -1,4 +1,4 @@
-useDynLib(BiBayMR, .registration = TRUE)
+useDynLib(BayBiMR, .registration = TRUE)
 importFrom(Rcpp, evalCpp)
-export(BiBayMR)
-export(BiBayMR_DP)
+export(BayBiMR)
+export(BayBiMR_DP)
